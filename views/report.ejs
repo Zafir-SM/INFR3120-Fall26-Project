@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="card border shadow-sm">
+      <div class="card-body p-4 p-md-5">
+        <h2 class="fw-bold mb-1">Report a Lost or Found Item</h2>
+        <p class="text-muted mb-4">Fill out the details below to submit a campus lost and found report.</p>
+
+        <form action="/report" method="POST">
+          <div class="mb-3">
+            <label for="itemName" class="form-label fw-semibold">Item Name *</label>
+            <input type="text" class="form-control" id="itemName" name="itemName" minlength="2" placeholder="e.g., Black Hydro Flask, AirPods Pro Case" required />
+          </div>
