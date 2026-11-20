@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold" href="/">
+        <img src="/images/FindIt Logo.png" alt="FindIt Team Logo" width="32" height="32" class="rounded" />
+        <span>FindIt</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link <%= activePage === 'home' ? 'active fw-semibold' : '' %>" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= activePage === 'report' ? 'active fw-semibold' : '' %>" href="/report">Report Item</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= activePage === 'dashboard' ? 'active fw-semibold' : '' %>" href="/dashboard">Dashboard</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main class="container my-5 flex-grow-1">
