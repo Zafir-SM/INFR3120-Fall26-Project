@@ -1,8 +1,27 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
 }
 
-a {
-  color: #00B7FF;
+.hero-card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+}
+
+.hero-logo {
+  max-width: 130px;
+  max-height: 130px;
+  object-fit: cover;
+}
+
+.badge-lost {
+  background-color: #f8d7da;
+  color: #842029;
+  font-weight: 500;
+}
+
+.badge-found {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  font-weight: 500;
 }
