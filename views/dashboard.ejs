@@ -1,8 +1,18 @@
 <%- include('partials/header') %>
 
-<% if (submitted) { %>
+<% if (msg === 'created') { %>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Report submitted!</strong> Your item report has been received for Release 1 preview.
+    <strong>Report created!</strong> Your item has been added to the dashboard.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } else if (msg === 'updated') { %>
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>Report updated!</strong> Your changes have been saved.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } else if (msg === 'deleted') { %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Report deleted!</strong> The item has been removed from the dashboard.
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% } %>
@@ -10,7 +20,7 @@
 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
   <div>
     <h2 class="fw-bold mb-1">Campus Lost &amp; Found Dashboard</h2>
-    <p class="text-muted mb-0">Browse active lost and found reports across campus.</p>
+    <p class="text-muted mb-0">Create, view, edit, or delete active lost and found reports.</p>
   </div>
   <div>
     <a href="/report" class="btn btn-primary">+ Report Item</a>
@@ -27,37 +37,34 @@
           <th>Location</th>
           <th>Date</th>
           <th>Description</th>
+          <th class="text-end">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><span class="badge rounded-pill px-3 py-2 badge-found">Found</span></td>
-          <td class="fw-semibold">Silver MacBook Charger</td>
-          <td>Campus Library 1st Floor</td>
-          <td>2026-11-18</td>
-          <td class="text-muted">USB-C 67W power adapter left near study pod 4.</td>
-        </tr>
-        <tr>
-          <td><span class="badge rounded-pill px-3 py-2 badge-lost">Lost</span></td>
-          <td class="fw-semibold">Blue Ontario Tech Lanyard &amp; Keys</td>
-          <td>SHA basement</td>
-          <td>2026-11-19</td>
-          <td class="text-muted">Has two silver keys and a black key fob attached.</td>
-        </tr>
-        <tr>
-          <td><span class="badge rounded-pill px-3 py-2 badge-found">Found</span></td>
-          <td class="fw-semibold">Black Hydro Flask (32 oz)</td>
-          <td>Science Building Room 2140</td>
-          <td>2026-11-19</td>
-          <td class="text-muted">Matte black bottle with a white sticker on the lid.</td>
-        </tr>
-        <tr>
-          <td><span class="badge rounded-pill px-3 py-2 badge-lost">Lost</span></td>
-          <td class="fw-semibold">Apple AirPods Pro Case</td>
-          <td>SIRC First Floor</td>
-          <td>2026-11-20</td>
-          <td class="text-muted">White charging case inside a navy silicone cover.</td>
-        </tr>
+        <% if (reports.length === 0) { %>
+          <tr>
+            <td colspan="6" class="text-center text-muted py-4">No active reports. Click "+ Report Item" to create one.</td>
+          </tr>
+        <% } %>
+        <% reports.forEach(item => { %>
+          <tr>
+            <td>
+              <span class="badge rounded-pill px-3 py-2 <%= item.status === 'Found' ? 'badge-found' : 'badge-lost' %>">
+                <%= item.status %>
+              </span>
+            </td>
+            <td class="fw-semibold"><%= item.itemName %></td>
+            <td><%= item.location %></td>
+            <td><%= item.date %></td>
+            <td class="text-muted"><%= item.description %></td>
+            <td class="text-end text-nowrap">
+              <a href="/edit/<%= item.id %>" class="btn btn-sm btn-outline-primary me-1">Edit</a>
+              <form action="/delete/<%= item.id %>" method="POST" class="d-inline" onsubmit="return confirm('Delete this report?');">
+                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
       </tbody>
     </table>
   </div>
