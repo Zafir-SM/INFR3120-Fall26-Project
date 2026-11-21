@@ -1,90 +1,18 @@
+<%- include('partials/header') %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet"
-        href="/stylesheets/dashboard.css">
-</head>
-<body>
+<% if (submitted) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Report submitted!</strong> Your item report has been received for Release 1 preview.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
 
-  <nav class="navbar">
-    <a href="/" class="logo">FindIt</a>
-
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/dashboard">Dashboard</a>
-      <a href="/report">Report an Item</a>
-    </div>
-  </nav>
-
-  <main class="container">
-
-    <header class="page-header">
-      <h1>Lost & Found Dashboard</h1>
-      <p>Browse lost and found items around campus.</p>
-    </header>
-
-    <div class="filters">
-      <a href="/dashboard?filter=all"
-         class="<%= activeFilter === 'all' ? 'active' : '' %>">
-        All Items
-      </a>
-
-      <a href="/dashboard?filter=lost"
-         class="<%= activeFilter === 'lost' ? 'active' : '' %>">
-        Lost
-      </a>
-
-      <a href="/dashboard?filter=found"
-         class="<%= activeFilter === 'found' ? 'active' : '' %>">
-        Found
-      </a>
-    </div>
-
-    <section class="items-grid">
-
-      <% if (items.length === 0) { %>
-        <div class="empty-state">
-          <h2>No items found</h2>
-          <p>There are no reports in this category.</p>
-        </div>
-      <% } else { %>
-
-        <% items.forEach(function(item) { %>
-          <article class="item-card">
-            <span class="item-type <%= item.type.toLowerCase() %>">
-              <%= item.type %>
-            </span>
-
-            <h2><%= item.name %></h2>
-
-            <p><strong>Location:</strong>
-              <%= item.location %>
-            </p>
-
-            <p><strong>Date:</strong>
-              <%= item.date %>
-            </p>
-
-            <p class="description">
-              <%= item.description %>
-            </p>
-
-            <p><strong>Status:</strong>
-              <%= item.status %>
-            </p>
-          </article>
-        <% }); %>
-
-      <% } %>
-
-    </section>
-  </main>
-
-</body>
-</html>
-<!-- pushing now  -->
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+  <div>
+    <h2 class="fw-bold mb-1">Campus Lost &amp; Found Dashboard</h2>
+    <p class="text-muted mb-0">Browse active lost and found reports across campus.</p>
+  </div>
+  <div>
+    <a href="/report" class="btn btn-primary">+ Report Item</a>
+  </div>
+</div>
