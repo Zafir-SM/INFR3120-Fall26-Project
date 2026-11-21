@@ -12,3 +12,19 @@
             <label for="itemName" class="form-label fw-semibold">Item Name *</label>
             <input type="text" class="form-control" id="itemName" name="itemName" minlength="2" placeholder="e.g., Black Hydro Flask, AirPods Pro Case" required />
           </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="status" class="form-label fw-semibold">Report Type *</label>
+              <select class="form-select" id="status" name="status" required>
+                <option value="">Select Lost or Found...</option>
+                <option value="Lost">Lost</option>
+                <option value="Found">Found</option>
+              </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="date" class="form-label fw-semibold">Date *</label>
+              <input type="date" class="form-control" id="date" name="date" required />
+            </div>
+          </div>
