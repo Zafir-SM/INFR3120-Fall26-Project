@@ -1,72 +1,50 @@
 <%- include('partials/header') %>
 
-<% if (msg === 'created') { %>
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Report created!</strong> Your item has been added to the dashboard.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-<% } else if (msg === 'updated') { %>
-  <div class="alert alert-info alert-dismissible fade show" role="alert">
-    <strong>Report updated!</strong> Your changes have been saved.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-<% } else if (msg === 'deleted') { %>
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Report deleted!</strong> The item has been removed from the dashboard.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-<% } %>
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="card border shadow-sm">
+      <div class="card-body p-4 p-md-5">
+        <h2 class="fw-bold mb-1">Edit Item Report</h2>
+        <p class="text-muted mb-4">Update the details or status for this campus listing.</p>
 
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
-  <div>
-    <h2 class="fw-bold mb-1">Campus Lost &amp; Found Dashboard</h2>
-    <p class="text-muted mb-0">Create, view, edit, or delete active lost and found reports.</p>
-  </div>
-  <div>
-    <a href="/report" class="btn btn-primary">+ Report Item</a>
-  </div>
-</div>
+        <form action="/edit/<%= item.id %>" method="POST">
+          <div class="mb-3">
+            <label for="itemName" class="form-label fw-semibold">Item Name *</label>
+            <input type="text" class="form-control" id="itemName" name="itemName" minlength="2" value="<%= item.itemName %>" required />
+          </div>
 
-<div class="card border shadow-sm">
-  <div class="table-responsive">
-    <table class="table table-hover align-middle mb-0">
-      <thead class="table-light">
-        <tr>
-          <th>Status</th>
-          <th>Item Name</th>
-          <th>Location</th>
-          <th>Date</th>
-          <th>Description</th>
-          <th class="text-end">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if (reports.length === 0) { %>
-          <tr>
-            <td colspan="6" class="text-center text-muted py-4">No active reports. Click "+ Report Item" to create one.</td>
-          </tr>
-        <% } %>
-        <% reports.forEach(item => { %>
-          <tr>
-            <td>
-              <span class="badge rounded-pill px-3 py-2 <%= item.status === 'Found' ? 'badge-found' : 'badge-lost' %>">
-                <%= item.status %>
-              </span>
-            </td>
-            <td class="fw-semibold"><%= item.itemName %></td>
-            <td><%= item.location %></td>
-            <td><%= item.date %></td>
-            <td class="text-muted"><%= item.description %></td>
-            <td class="text-end text-nowrap">
-              <a href="/edit/<%= item.id %>" class="btn btn-sm btn-outline-primary me-1">Edit</a>
-              <form action="/delete/<%= item.id %>" method="POST" class="d-inline" onsubmit="return confirm('Delete this report?');">
-                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-              </form>
-            </td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="status" class="form-label fw-semibold">Report Type *</label>
+              <select class="form-select" id="status" name="status" required>
+                <option value="Lost" <%= item.status === 'Lost' ? 'selected' : '' %>>Lost</option>
+                <option value="Found" <%= item.status === 'Found' ? 'selected' : '' %>>Found</option>
+              </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="date" class="form-label fw-semibold">Date *</label>
+              <input type="date" class="form-control" id="date" name="date" value="<%= item.date %>" required />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="location" class="form-label fw-semibold">Campus Location *</label>
+            <input type="text" class="form-control" id="location" name="location" minlength="2" value="<%= item.location %>" required />
+          </div>
+
+          <div class="mb-4">
+            <label for="description" class="form-label fw-semibold">Short Description *</label>
+            <textarea class="form-control" id="description" name="description" rows="3" minlength="5" required><%= item.description %></textarea>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+            <a href="/dashboard" class="btn btn-outline-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 
