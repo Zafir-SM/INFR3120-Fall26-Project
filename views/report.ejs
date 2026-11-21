@@ -28,3 +28,25 @@
               <input type="date" class="form-control" id="date" name="date" required />
             </div>
           </div>
+
+          <div class="mb-3">
+            <label for="location" class="form-label fw-semibold">Campus Location *</label>
+            <input type="text" class="form-control" id="location" name="location" minlength="2" placeholder="e.g., Library 2nd Floor, Science Building Atrium" required />
+          </div>
+
+          <div class="mb-4">
+            <label for="description" class="form-label fw-semibold">Short Description *</label>
+            <textarea class="form-control" id="description" name="description" rows="3" minlength="5" placeholder="Color, brand, stickers, or identifying marks..." required></textarea>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary px-4">Submit Report</button>
+            <a href="/dashboard" class="btn btn-outline-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
