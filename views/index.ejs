@@ -1,11 +1,47 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<%- include('partials/header') %>
+
+<section class="hero-card p-4 p-md-5 rounded-3 mb-4">
+  <div class="row align-items-center">
+    <div class="col-lg-8">
+      <p class="text-uppercase text-muted small fw-semibold mb-2">Campus Lost &amp; Found Portal</p>
+      <h1 class="h2 fw-bold mb-3">Lost something on campus? Report or browse items easily.</h1>
+      <p class="text-muted mb-4">
+        FindIt helps students log misplaced belongings and check active lost and found reports across campus.
+      </p>
+      <div class="d-flex flex-wrap gap-2">
+        <a href="/report" class="btn btn-primary px-4">
+          Report Lost or Found Item
+        </a>
+        <a href="/dashboard" class="btn btn-outline-secondary px-4">
+          View Dashboard
+        </a>
+      </div>
+    </div>
+    <div class="col-lg-4 text-center mt-4 mt-lg-0">
+      <img src="/images/FindIt Logo.png" alt="FindIt Brand Logo" class="img-fluid rounded border hero-logo" />
+    </div>
+  </div>
+</section>
+
+<section class="card-group">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title fw-bold">1. Report an Item</h5>
+      <p class="card-text text-muted small">Submit the item name, Lost or Found status, campus location, date, and a short description.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title fw-bold">2. Browse Listings</h5>
+      <p class="card-text text-muted small">View active campus lost and found entries organized in a simple dashboard table.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title fw-bold">3. Reclaim Belongings</h5>
+      <p class="card-text text-muted small">Check item details and locations to connect with the finder on campus.</p>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
